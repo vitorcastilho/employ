@@ -4,6 +4,7 @@ import Table from "@/components/Table";
 import TableSearch from "@/components/TableSearch";
 import { announcementsData, role } from "@/lib/data";
 import Image from "next/image";
+import { constants, texts } from "./announcements.constants";
 
 type Announcement = {
   id: number;
@@ -11,26 +12,6 @@ type Announcement = {
   class: string;
   date: string;
 };
-
-const columns = [
-  {
-    header: "Title",
-    accessor: "title",
-  },
-  {
-    header: "Class",
-    accessor: "class",
-  },
-  {
-    header: "Date",
-    accessor: "date",
-    className: "hidden md:table-cell",
-  },
-  {
-    header: "Actions",
-    accessor: "action",
-  },
-];
 
 const AnnouncementListPage = () => {
   const renderRow = (item: Announcement) => (
@@ -59,7 +40,7 @@ const AnnouncementListPage = () => {
       {/* TOP */}
       <div className="flex items-center justify-between">
         <h1 className="hidden md:block text-lg font-semibold">
-          All Announcements
+          {texts.headerPage}
         </h1>
         <div className="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
           <TableSearch />
@@ -77,7 +58,11 @@ const AnnouncementListPage = () => {
         </div>
       </div>
       {/* LIST */}
-      <Table columns={columns} renderRow={renderRow} data={announcementsData} />
+      <Table
+        columns={constants.columns}
+        renderRow={renderRow}
+        data={announcementsData}
+      />
       {/* PAGINATION */}
       <Pagination />
     </div>

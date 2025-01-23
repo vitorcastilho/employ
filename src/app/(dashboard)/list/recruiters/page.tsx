@@ -5,6 +5,7 @@ import TableSearch from "@/components/TableSearch";
 import { role, recruitersData } from "@/lib/data";
 import Image from "next/image";
 import Link from "next/link";
+import { constants, texts } from "./recruiter.constants";
 
 type Recruiter = {
   id: number;
@@ -17,42 +18,6 @@ type Recruiter = {
   classes: string[];
   address: string;
 };
-
-const columns = [
-  {
-    header: "Info",
-    accessor: "info",
-  },
-  {
-    header: "Recruiter ID",
-    accessor: "recruiterId",
-    className: "hidden md:table-cell",
-  },
-  // {
-  //   header: "Subjects",
-  //   accessor: "subjects",
-  //   className: "hidden md:table-cell",
-  // },
-  // {
-  //   header: "Classes",
-  //   accessor: "classes",
-  //   className: "hidden md:table-cell",
-  // },
-  {
-    header: "Phone",
-    accessor: "phone",
-    className: "hidden lg:table-cell",
-  },
-  {
-    header: "Address",
-    accessor: "address",
-    className: "hidden lg:table-cell",
-  },
-  {
-    header: "Actions",
-    accessor: "action",
-  },
-];
 
 const RecruiterListPage = () => {
   const renderRow = (item: Recruiter) => (
@@ -74,8 +39,6 @@ const RecruiterListPage = () => {
         </div>
       </td>
       <td className="hidden md:table-cell">{item.recruiterId}</td>
-      {/* <td className="hidden md:table-cell">{item.subjects.join(",")}</td> */}
-      {/* <td className="hidden md:table-cell">{item.classes.join(",")}</td> */}
       <td className="hidden md:table-cell">{item.phone}</td>
       <td className="hidden md:table-cell">{item.address}</td>
       <td>
@@ -89,7 +52,7 @@ const RecruiterListPage = () => {
             // <button className="w-7 h-7 flex items-center justify-center rounded-full bg-lamaPurple">
             //   <Image src="/delete.png" alt="" width={16} height={16} />
             // </button>
-            <FormModal table="recruiter" type="delete" id={item.id}/>
+            <FormModal table="recruiter" type="delete" id={item.id} />
           )}
         </div>
       </td>
@@ -98,9 +61,10 @@ const RecruiterListPage = () => {
 
   return (
     <div className="bg-white p-4 rounded-md flex-1 m-4 mt-0">
-      {/* TOP */}
       <div className="flex items-center justify-between">
-        <h1 className="hidden md:block text-lg font-semibold">All Recruiters</h1>
+        <h1 className="hidden md:block text-lg font-semibold">
+          {texts.headerPage}
+        </h1>
         <div className="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
           <TableSearch />
           <div className="flex items-center gap-4 self-end">
@@ -114,14 +78,16 @@ const RecruiterListPage = () => {
               // <button className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow">
               //   <Image src="/plus.png" alt="" width={14} height={14} />
               // </button>
-              <FormModal table="recruiter" type="create"/>
+              <FormModal table="recruiter" type="create" />
             )}
           </div>
         </div>
       </div>
-      {/* LIST */}
-      <Table columns={columns} renderRow={renderRow} data={recruitersData} />
-      {/* PAGINATION */}
+      <Table
+        columns={constants.columns}
+        renderRow={renderRow}
+        data={recruitersData}
+      />
       <Pagination />
     </div>
   );

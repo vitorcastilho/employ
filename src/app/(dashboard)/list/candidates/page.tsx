@@ -5,6 +5,7 @@ import TableSearch from "@/components/TableSearch";
 import { role, candidatesData } from "@/lib/data";
 import Image from "next/image";
 import Link from "next/link";
+import { constants, texts } from "./candidates.constants"
 
 type Candidate = {
   id: number;
@@ -18,36 +19,7 @@ type Candidate = {
   address: string;
 };
 
-const columns = [
-  {
-    header: "Info",
-    accessor: "info",
-  },
-  {
-    header: "Candidate ID",
-    accessor: "candidateId",
-    className: "hidden md:table-cell",
-  },
-  {
-    header: "Grade",
-    accessor: "grade",
-    className: "hidden md:table-cell",
-  },
-  {
-    header: "Phone",
-    accessor: "phone",
-    className: "hidden lg:table-cell",
-  },
-  {
-    header: "Address",
-    accessor: "address",
-    className: "hidden lg:table-cell",
-  },
-  {
-    header: "Actions",
-    accessor: "action",
-  },
-];
+
 
 const CandidateListPage = () => {
   const renderRow = (item: Candidate) => (
@@ -69,7 +41,7 @@ const CandidateListPage = () => {
         </div>
       </td>
       <td className="hidden md:table-cell">{item.candidateId}</td>
-      <td className="hidden md:table-cell">{item.grade}</td>
+      {/* <td className="hidden md:table-cell">{item.grade}</td> */}
       <td className="hidden md:table-cell">{item.phone}</td>
       <td className="hidden md:table-cell">{item.address}</td>
       <td>
@@ -94,7 +66,7 @@ const CandidateListPage = () => {
     <div className="bg-white p-4 rounded-md flex-1 m-4 mt-0">
       {/* TOP */}
       <div className="flex items-center justify-between">
-        <h1 className="hidden md:block text-lg font-semibold">All Candidates</h1>
+        <h1 className="hidden md:block text-lg font-semibold">{texts.headerPage}</h1>
         <div className="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
           <TableSearch />
           <div className="flex items-center gap-4 self-end">
@@ -114,7 +86,7 @@ const CandidateListPage = () => {
         </div>
       </div>
       {/* LIST */}
-      <Table columns={columns} renderRow={renderRow} data={candidatesData} />
+      <Table columns={constants.columns} renderRow={renderRow} data={candidatesData} />
       {/* PAGINATION */}
       <Pagination />
     </div>
